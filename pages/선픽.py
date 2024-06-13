@@ -1,4 +1,5 @@
 import streamlit as st
+import openai from OpenAI
 
 # Using object notation
 add_selectbox = st.sidebar.selectbox(
