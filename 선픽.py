@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.write("# optimal")
+st.sidebar.write("# optimal")
 st.sidebar.title('OptimalBotAI')
 
 st.page_link("pages/후픽.py")
