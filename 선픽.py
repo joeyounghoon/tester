@@ -134,11 +134,41 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# 이미지 파일 경로 설정
-image_paths = images.png
+import streamlit as st
 
-# 초기 이미지 선택
-selected_image_path = image_paths[0]
+# 이미지 파일 경로 설정
+image1_path = "image1.png"
+images_path = "images.png"
+
+# CSS 설정
+st.markdown(
+    """
+    <style>
+    .image-container {
+        display: flex;
+        flex-direction: row;
+    }
+    .thumbnail {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin: 5px;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+    .thumbnail:hover {
+        transform: scale(1.1);
+    }
+    .selected-image {
+        width: 300px;
+        height: 300px;
+        object-fit: contain;
+        margin-top: 20px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Streamlit 애플리케이션 구성
 st.title('이미지 클릭 예시')
@@ -157,13 +187,19 @@ function showImage(imagePath) {
 """
 
 # JavaScript 코드 삽입
-components.html(javascript)
+st.markdown(javascript, unsafe_allow_html=True)
 
-# 이미지를 클릭하면 JavaScript 함수를 호출하여 선택된 이미지 변경
-for image_path in image_paths:
-    image_html = f'<img class="thumbnail" src="{image_path}" onclick="showImage(\'{image_path}\')" />'
-    image_container.markdown(image_html, unsafe_allow_html=True)
+# 이미지 표시 및 이벤트 설정
+with st.container():
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("### 첫 번째 이미지")
+        st.image(image1_path, use_column_width=True, output_format='png')
+
+    with col2:
+        st.markdown("### 크게 보기")
+        st.image(images_path, use_column_width=True, output_format='png')
 
 # 선택된 이미지 표시
-selected_image_html = f'<img id="selected-image" class="selected-image" src="{selected_image_path}" />'
+selected_image_html = f'<img id="selected-image" class="selected-image" src="{images_path}" />'
 st.markdown(selected_image_html, unsafe_allow_html=True)
