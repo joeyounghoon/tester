@@ -88,8 +88,7 @@ if st.button("상성 보기"):
   # 결과 출력 (선택 사항)
   for key, value in response.items():
     print(f"{key}: {value}")
-  if st.button("닫기"):
-    
+
 # Streamlit 페이지 구성
 st.set_page_config(layout="wide")
 
