@@ -3,6 +3,9 @@ from openai import OpenAI
 import streamlit.components.v1 as components
 import time
 
+# OpenAI API 키 설정
+openai.api_key = 'sk-proj-mayBgL7AxeyXQnxLlJL5T3BlbkFJPmO5bCmENRMUbggB2dNA'
+
 # 응답함수
 def run_and_wait(client, assistant, thread):
   run = client.beta.threads.runs.create(
@@ -21,11 +24,6 @@ def run_and_wait(client, assistant, thread):
       break
   return run
 
-import openai
-
-openai.api_key = 'YOUR_OPENAI_API_KEY'
-
-
 def translate_image_to_korean(file_id, user_message):
   
     my_file = client.files.create(
@@ -36,8 +34,8 @@ def translate_image_to_korean(file_id, user_message):
   
     # 어시스턴트 생성
     assistant = openai.Assistant.create(
-        name="번역 전문가",
-        description="당신은 번역 전문가입니다.",
+        name="롤 코치",
+        description="당신은 리그오브레전드 게임의 코치입니다.",
         model="gpt-4-turbo-preview",
         tools=[{"type": "code_interpreter"}],
         file_ids=[file_id]
@@ -84,7 +82,7 @@ def translate_image_to_korean(file_id, user_message):
 
 if st.button("상성 보기"):  
   file_id = 'YOUR_FILE_ID'
-  user_message = '첨부한 pdf 파일의 글을 읽은 다음, 챔피언의 상성을 알려줘.'
+  user_message = '첨부한 docx 파일의 글을 읽은 다음, 챔피언의 상성을 알려줘.'
   response = translate_image_to_korean(file_id, user_message)
 
   # 결과 출력 (선택 사항)
@@ -92,12 +90,6 @@ if st.button("상성 보기"):
     print(f"{key}: {value}")
   if st.button("닫기"):
     
-  
-
-
-# OpenAI API 키 설정
-openai.api_key = 'sk-proj-mayBgL7AxeyXQnxLlJL5T3BlbkFJPmO5bCmENRMUbggB2dNA'
-
 # Streamlit 페이지 구성
 st.set_page_config(layout="wide")
 
