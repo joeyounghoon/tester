@@ -27,6 +27,13 @@ openai.api_key = 'YOUR_OPENAI_API_KEY'
 
 
 def translate_image_to_korean(file_id, user_message):
+  
+    my_file = client.files.create(
+      file = open("ashe.docx",'rb'),
+      purpose='assistants'
+    )
+    my_file  
+  
     # 어시스턴트 생성
     assistant = openai.Assistant.create(
         name="번역 전문가",
