@@ -2,6 +2,8 @@ import streamlit as st
 import streamlit.components.v1 as components
 import time
 import openai
+from PIL import Image
+import os
 
 
 
@@ -82,28 +84,39 @@ st.sidebar.markdown(
     """, unsafe_allow_html=True
 )
 
-# OpenAI API 키 설정
-openai.api_key = "sk-proj-ymDJhgmlypm59yovogzYT3BlbkFJa2IOtnB2mEXqIchhX4dO"
-client = openai.OpenAI()
-# 페이지 제목 설정
-st.title("OpenAI Assistant 웹페이지")
+# CSS 스타일을 정의하여 이미지를 동그랗게 만듭니다.
+st.markdown("""
+    <style>
+    .circle-img {
+        display: inline-block;
+        border-radius: 50%;
+        overflow: hidden;
+        width: 80px;
+        height: 80px;
+        margin: 10px;
+    }
+    .circle-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-# 상성보기 버튼 생성
-show_button = st.button("상성보기")
+# 이미지 파일 디렉토리 경로
+img_dir = 'path/to/your/image/directory'  # 여기에 실제 이미지 디렉토리 경로를 설정하세요.
 
-# 상성보기 버튼 클릭 시 텍스트 입력 상자 및 응답 출력
-if show_button:
+# 이미지 파일 리스트
+img_files = ['image1.png', 'image2.png', 'image3.png']
 
-    # OpenAI Assistant API call
-    response = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": "LangChain은 무엇을 하는 라이브러리지?"}
-        ]
-    )
-    
-    # Process and display response
-    if response["choices"]:
-        response_text = response["choices"][0]["text"]
-        st.write("**어시스트봇:**", response_text)
+# 이미지를 화면에 동그랗게 나열하여 출력합니다.
+for img_file in img_files:
+    img_path = os.path.join(img_dir, img_file)
+    image = Image.open(img_path)
+
+    img_col = f"""
+    <div class="circle-img">
+        <img src="data:image/png;base64,{st.image(image, use_column_width=True)}" alt="Image">
+    </div>
+    """
+    st.markdown(img_col, unsafe_allow_html=True)
