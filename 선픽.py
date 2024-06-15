@@ -1,13 +1,5 @@
 import streamlit as st
-import streamlit.components.v1 as components
-import time
-import openai
-from PIL import Image
-import os
 import base64
-import pandas as pd
-
-
 
 # Streamlit 애플리케이션 시작
 st.set_page_config(layout="wide")
@@ -105,42 +97,14 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-
-# Streamlit 페이지에 CSS 적용하기
-st.markdown(
-    """
-    <style>
-    .image-container {
-        display: flex;
-        flex-direction: row;
-    }
-    .thumbnail {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-        margin: 5px;
-        cursor: pointer;
-        transition: transform 0.2s;
-    }
-    .thumbnail:hover {
-        transform: scale(1.1);
-    }
-    .selected-image {
-        width: 300px;
-        height: 300px;
-        object-fit: contain;
-        margin-top: 20px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 # Load images as base64 encoded strings
-image1_data = open('image1.png', 'rb').read()
+image1_path = 'image1.png'
+images_path = 'images.png'
+
+image1_data = open(image1_path, 'rb').read()
 image1_b64 = base64.b64encode(image1_data).decode()
 
-image2_data = open('images.png', 'rb').read()
+image2_data = open(images_path, 'rb').read()
 image2_b64 = base64.b64encode(image2_data).decode()
 
 # Create HTML and JavaScript code for image display and click event
