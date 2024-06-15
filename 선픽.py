@@ -133,9 +133,8 @@ st.markdown(
 
 st.markdown(
     """
-    <div style='text-align: right;'>
-        <img src='images.png' , style='width: 50%;'>
+    <div style='text-align: center;'>
+        <img src='images.png' alt='Sunrise by the mountains' style='width: 10%; display: block; margin: 0 auto;'>
     </div>
     """, unsafe_allow_html=True
 )
-
