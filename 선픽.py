@@ -93,15 +93,18 @@ show_button = st.button("상성보기")
 
 # 상성보기 버튼 클릭 시 텍스트 입력 상자 및 응답 출력
 if show_button:
-    # 사용자 입력 텍스트 받기
-    user_input = st.text_input("질문 또는 요청을 입력하세요")
-
-    # OpenAI Assistant API 호출 및 응답 받기
-    response = openai.Assistant.create(
-        assistant_id="YOUR_ASSISTANT_ID",
-        body=user_input
-    )
-    response_text = response["messages"][0]["content"]
-
+    
     # 응답 텍스트 출력
     st.write("**어시스트봇:**", response_text)
+    
+    # OpenAI Assistant API 호출 및 응답 받기
+    response = client.chat.completions.create(
+      model="gpt-4-turbo-preview",
+      messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "LangChain은 무엇을 하는 라이브러리지?"}
+      ]
+    )
+    response
+
+ 
