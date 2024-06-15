@@ -118,13 +118,11 @@ st.markdown(
     <div class='sidebar'>
         <div class='champion-section'>
             <h5 class='recommend-champ-title'>원딜 추천 챔피언</h5>
-            <p class='counter-text'>카운터</p> <!-- Added a paragraph for "조합" -->
             <div class="champion-list-content">
             </div>
         </div>
         <div class='champion-section'>
             <h5 class='recommend-champ-title'>서폿 추천 챔피언</h5>
-             <p class='counter-text'>카운터</p> <!-- Added a paragraph for "카운터" -->
             <div class="champion-list-content">
             </div>
         </div>
@@ -134,12 +132,18 @@ st.markdown(
 
 st.markdown(
     """
-    <style>
-    /* Optional CSS for further styling */
-    .counter-text {
-        font-size: 14px;
-        color: #666;
-    }
-    </style>
+    <div class='divider'></div>
+    <div class='sidebar'>
+        <div class='champion-section'>
+            <h5 class='recommend-champ-title'>조합</h5>
+            <div class="champion-list-content">
+            </div>
+        </div>
+        <div class='champion-section'>
+            <h5 class='recommend-champ-title'>카운터</h5>
+            <div class="champion-list-content">
+            </div>
+        </div>
+    </div>
     """, unsafe_allow_html=True
 )
