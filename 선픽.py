@@ -130,5 +130,5 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-st.write("조합")
-st.write("카운터")
+st.subheader('This is a subheader with a divider', divider='rainbow')
+st.subheader('_Streamlit_ is :blue[cool] :sunglasses:')
