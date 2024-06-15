@@ -117,12 +117,12 @@ st.markdown(
     <div class='divider'></div>
     <div class='sidebar'>
         <div class='champion-section'>
-            <h5 class='recommend-champ-title'>원딜 추천 챔피언 조합</h5>
+            <h5 class='recommend-champ-title'>원딜 추천 챔피언           조합</h5>
             <div class="champion-list-content">
             </div>
         </div>
         <div class='champion-section'>
-            <h5 class='recommend-champ-title'>서폿 추천 챔피언 카운터</h5>
+            <h5 class='recommend-champ-title'>서폿 추천 챔피언           카운터</h5>
             <div class="champion-list-content">
             </div>
         </div>
