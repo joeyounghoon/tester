@@ -117,12 +117,14 @@ st.markdown(
     <div class='divider'></div>
     <div class='sidebar'>
         <div class='champion-section'>
-            <h5 class='recommend-champ-title'>원딜 추천 챔피언           조합</h5>
+            <h5 class='recommend-champ-title'>원딜 추천 챔피언</h5>
+            <p class='counter-text'>카운터</p> <!-- Added a paragraph for "조합" -->
             <div class="champion-list-content">
             </div>
         </div>
         <div class='champion-section'>
-            <h5 class='recommend-champ-title'>서폿 추천 챔피언           카운터</h5>
+            <h5 class='recommend-champ-title'>서폿 추천 챔피언</h5>
+            <p class='counter-text'>카운터</p> <!-- Added a paragraph for "카운터" -->
             <div class="champion-list-content">
             </div>
         </div>
@@ -130,5 +132,15 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-st.subheader('This is a subheader with a divider', divider='rainbow')
-st.subheader('_Streamlit_ is :blue[cool] :sunglasses:')
+st.markdown(
+    """
+    <style>
+    /* Additional CSS for spacing */
+    .counter-text {
+        margin-top: 10px; /* Adjust margin top to create space */
+        font-size: 14px; /* Adjust font size if necessary */
+        color: #666; /* Adjust color */
+    }
+    </style>
+    """, unsafe_allow_html=True
+)
