@@ -103,20 +103,67 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# 이미지 파일 디렉토리 경로
-img_dir = 'https://item.kakaocdn.net/do/4df35949efd9d681ba97979ce27c82cdac8e738cb631e72fdb9a96b36413984e'  # 여기에 실제 이미지 디렉토리 경로를 설정하세요.
 
-# 이미지 파일 리스트
-img_files = ['image1.png', 'image2.png', 'image3.png']
-
-# 이미지를 화면에 동그랗게 나열하여 출력합니다.
-for img_file in img_files:
-    img_path = os.path.join(img_dir, img_file)
-    image = Image.open(img_path)
-
-    img_col = f"""
-    <div class="circle-img">
-        <img src="data:image/png;base64,{st.image(image, use_column_width=True)}" alt="Image">
-    </div>
+# Streamlit 페이지에 CSS 적용하기
+st.markdown(
     """
-    st.markdown(img_col, unsafe_allow_html=True)
+    <style>
+    .image-container {
+        display: flex;
+        flex-direction: row;
+    }
+    .thumbnail {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin: 5px;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+    .thumbnail:hover {
+        transform: scale(1.1);
+    }
+    .selected-image {
+        width: 300px;
+        height: 300px;
+        object-fit: contain;
+        margin-top: 20px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# 이미지 파일 경로 설정
+image_paths = images.png
+
+# 초기 이미지 선택
+selected_image_path = image_paths[0]
+
+# Streamlit 애플리케이션 구성
+st.title('이미지 클릭 예시')
+
+# 이미지 컨테이너 생성
+image_container = st.empty()
+
+# 이미지 클릭 시 실행할 JavaScript 코드
+javascript = """
+<script>
+function showImage(imagePath) {
+    var img = document.getElementById('selected-image');
+    img.src = imagePath;
+}
+</script>
+"""
+
+# JavaScript 코드 삽입
+components.html(javascript)
+
+# 이미지를 클릭하면 JavaScript 함수를 호출하여 선택된 이미지 변경
+for image_path in image_paths:
+    image_html = f'<img class="thumbnail" src="{image_path}" onclick="showImage(\'{image_path}\')" />'
+    image_container.markdown(image_html, unsafe_allow_html=True)
+
+# 선택된 이미지 표시
+selected_image_html = f'<img id="selected-image" class="selected-image" src="{selected_image_path}" />'
+st.markdown(selected_image_html, unsafe_allow_html=True)
