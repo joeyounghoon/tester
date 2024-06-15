@@ -131,4 +131,11 @@ st.markdown(
 )
 
 
-st.image('images.png')
+st.markdown(
+    """
+    <div style='text-align: right;'>
+        <img src='images.png' alt='Sunrise by the mountains' style='width: 5%;'>
+    </div>
+    """, unsafe_allow_html=True
+)
+
