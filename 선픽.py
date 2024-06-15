@@ -131,4 +131,4 @@ st.markdown(
 )
 
 
-st.image('images.jpg', caption='Sunrise by the mountains')
+st.image('images.jpg')
