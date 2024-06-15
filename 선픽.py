@@ -131,4 +131,4 @@ st.markdown(
 )
 
 
-st.image('images.jpg')
+st.image('images.png')
