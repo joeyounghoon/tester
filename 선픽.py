@@ -1,28 +1,23 @@
 import streamlit as st
-import base64
 
-# Streamlit 애플리케이션 시작
+# Streamlit 페이지 구성
 st.set_page_config(layout="wide")
 
-# 상성 보기 버튼 처리
-if st.button("상성 보기"):
-    st.subheader('This is a subheader with a divider', divider='rainbow')
-    st.subheader('_Streamlit_ is :blue[cool] :sunglasses:')
-
-# 사이드바 설정
+# 사이드바에 들어가는 타이틀
 st.sidebar.title('OptimalBotAI')
 
-# CSS 적용
+# Streamlit 페이지에 CSS 적용하기!
 st.markdown(
     """
     <style>
-    .divider {
-        width: 100%;
-        height: 2px;
-        position: absolute;
-        top: 50%;
-        z-index: 99999;
-        background-color: black;
+    body {
+        overflow: hidden;
+    }
+    .main {
+        background-color: #f0f2f6;
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
     }
     .sidebar {
         padding: 10px;
@@ -30,7 +25,7 @@ st.markdown(
         position: relative;
         user-select: auto;
         width: 336px;
-        height: 100vh;
+        height: 842px;
         box-sizing: border-box;
         flex-shrink: 0;
     }
@@ -55,91 +50,83 @@ st.markdown(
         text-align: left;
         color: black;
     }
+    .divider {
+        width: 100%;
+        height: 2px;
+        position: absolute;
+        top: 50%;
+        z-index: 99999;
+        background-color: black;
+    }
+
+    /*미디어 쿼리 패딩 제거 */
+    @media (min-width: 576px) {
+        .st-emotion-cache-1jicfl2 {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+    }
+
+    /* 스크롤바 제거 */
+    .st-emotion-cache-1jicfl2 {
+        width: 100%;
+        padding: 0;
+        min-width: auto;
+        max-width: initial;
+    }
+
+    /*streamlit 기본 상단 바 제거*/
+    .st-emotion-cache-h4xjwg {
+        height: 0;
+    }
+
+    /*여백 안남게 scoll-margin 제거*/
+    .st-emotion-cache-1jzia57 h1, 
+    .st-emotion-cache-1jzia57 h2, 
+    .st-emotion-cache-1jzia57 h3, 
+    .st-emotion-cache-1jzia57 h4, 
+    .st-emotion-cache-1jzia57 h5, 
+    .st-emotion-cache-1jzia57 h6, 
+    .st-emotion-cache-1jzia57 span {
+        scroll-margin-top: 0;
+    }
+
+    /*streamlit에서 기본으로 제공하는 공유, 깃허브 링크 등등 바 설정*/
+    .st-emotion-cache-15ecox0.ezrtsby0 {
+        background-color: black;
+        border-radius: 10px;
+    }
+
+    /*화면 상단 gap 제거*/
+    .st-emotion-cache-1wmy9hl div {
+        gap: 0;
+    }
+    
+
+    /*여백 제거*/
+    .st-emotion-cache-ul70r3 {
+        margin-bottom: 0;
+    }
     </style>
     """, unsafe_allow_html=True
 )
 
-# 사이드바 내용 추가
-st.sidebar.markdown(
+# Streamlit markdown으로 구성!
+st.markdown(
     """
     <div class='divider'></div>
-    <div class='champion-section'>
-        <h5 class='recommend-champ-title'>원딜 추천 챔피언</h5>
-        <div class="champion-list-content">
-            <!-- 챔피언 리스트 내용 추가 -->
+    <div class='sidebar'>
+        <div class='champion-section'>
+            <h5 class='recommend-champ-title'>원딜 추천 챔피언</h5>
+            <div class="champion-list-content">
+            </div>
         </div>
-    </div>
-    <div class='champion-section'>
-        <h5 class='recommend-champ-title'>서폿 추천 챔피언</h5>
-        <div class="champion-list-content">
-            <!-- 챔피언 리스트 내용 추가 -->
+        <div class='champion-section'>
+            <h5 class='recommend-champ-title'>서폿 추천 챔피언</h5>
+            <div class="champion-list-content">
+            </div>
         </div>
     </div>
     """, unsafe_allow_html=True
 )
 
-# CSS 스타일을 정의하여 이미지를 동그랗게 만듭니다.
-st.markdown("""
-    <style>
-    .circle-img {
-        display: inline-block;
-        border-radius: 50%;
-        overflow: hidden;
-        width: 80px;
-        height: 80px;
-        margin: 10px;
-    }
-    .circle-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-# Load images as base64 encoded strings
-image1_path = 'image1.png'
-images_path = 'images.png'
-
-image1_data = open(image1_path, 'rb').read()
-image1_b64 = base64.b64encode(image1_data).decode()
-
-image2_data = open(images_path, 'rb').read()
-image2_b64 = base64.b64encode(image2_data).decode()
-
-# Create HTML and JavaScript code for image display and click event
-html_code = f"""
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-#image1 {
-  display: block;
-  cursor: pointer;
-  max-width: 500px;
-  height: auto;
-}
-
-#images {
-  display: none;
-  max-width: 500px;
-  height: auto;
-}
-</style>
-</head>
-<body>
-<img id="image1" src="data:image/png;base64,{image1_b64}" alt="Image 1">
-<img id="images" src="data:image/png;base64,{image2_b64}" alt="Image 2">
-
-<script>
-document.getElementById('image1').addEventListener('click', function() {{
-  document.getElementById('image1').style.display = 'none';
-  document.getElementById('images').style.display = 'block';
-}});
-</script>
-</body>
-</html>
-"""
-
-# Display the HTML content in Streamlit
-st.write(html_code, unsafe_allow_html=True)
