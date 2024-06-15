@@ -130,11 +130,12 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-
-st.markdown(
-    """
-    <div style='position: relative; height: 300px;'>
-        <img src='image1.png' alt='Sunrise by the mountains' style='position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 50%;'>
-    </div>
-    """, unsafe_allow_html=True
-)
+def image():
+    st.markdown(
+        """
+        <div style='position: relative; height: 300px;'>
+            <img src='image1.png' alt='Sunrise by the mountains' style='position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 50%;'>
+        </div>
+        """, unsafe_allow_html=True
+    )
+image()
