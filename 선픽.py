@@ -1,25 +1,84 @@
 import streamlit as st
 from openai import OpenAI
 import streamlit.components.v1 as components
+import time
 
-# OpenAI API 키 설정 (API 키를 환경변수 또는 직접 입력)
-openai.api_key = 'sk-proj-mayBgL7AxeyXQnxLlJL5T3BlbkFJPmO5bCmENRMUbggB2dNA'
-
-client = OpenAI()
-
-def respond(messages):
-    client = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=messages
+# 응답함수
+def run_and_wait(client, assistant, thread):
+  run = client.beta.threads.runs.create(
+    thread_id=thread.id,
+    assistant_id=assistant.id
+  )
+  while True:
+    run_check = client.beta.threads.runs.retrieve(
+      thread_id=thread.id,
+      run_id=run.id
     )
-    messages = [
-    {"role": "system", "content": "You are a helpful assistant."},
-    {"role": "user", "content": "Who won the world series in 2020?"},
-    {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
-    {"role": "user", "content": "Where was it played?"}
-    ]
-    return client.choices[0].message['content']
+    print(run_check.status)
+    if run_check.status in ['queued','in_progress']:
+      time.sleep(2)
+    else:
+      break
+  return run
 
+import openai
+
+openai.api_key = 'YOUR_OPENAI_API_KEY'
+
+
+def translate_image_to_korean(file_id, file_name):
+    # 어시스턴트 생성
+    assistant = openai.Assistant.create(
+        name="번역 전문가",
+        description="당신은 리그오브레전드 게임의 코치입니다.",
+        model="gpt-4o",
+        tools=[{"type": "code_interpreter"}],
+        file_ids=[file_id]
+    )
+
+    # 스레드 생성
+    thread = openai.Thread.create(
+        messages=[
+            {
+                "role": "user",
+                "content": "첨부한 pdf 파일을 근거로 챔피언의 상성을 분석해줘.",
+                "file_ids": [file_id]
+            }
+        ]
+    )
+
+    # 작업 실행 및 대기
+    run = openai.run_and_wait(client, assistant, thread)
+
+    # 스레드 메시지 리스트
+    thread_messages = openai.Thread.messages.list(thread.id)
+
+    # 메시지 내용 수집
+    translated_text = []
+    for msg in thread_messages.data:
+        translated_text.append(f"{msg.role}: {msg.content}")
+
+    # 스레드 삭제
+    response_thread_delete = openai.Thread.delete(thread.id)
+
+    # 어시스턴트 삭제
+    response_assistant_delete = openai.Assistant.delete(assistant.id)
+
+    # 파일 삭제
+    response_file_delete = openai.File.delete(file_id)
+
+    # 응답 반환
+    return {
+        "translated_text": translated_text,
+        "response_thread_delete": response_thread_delete,
+        "response_assistant_delete": response_assistant_delete,
+        "response_file_delete": response_file_delete
+    }
+
+
+
+# OpenAI API 키 설정
+openai.api_key = 'sk-proj-mayBgL7AxeyXQnxLlJL5T3BlbkFJPmO5bCmENRMUbggB2dNA'
 
 # Streamlit 페이지 구성
 st.set_page_config(layout="wide")
