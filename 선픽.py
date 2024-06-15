@@ -1,69 +1,24 @@
 import streamlit as st
-import openai
+from openai import OpenAI
 import streamlit.components.v1 as components
 
 # OpenAI API 키 설정 (API 키를 환경변수 또는 직접 입력)
 openai.api_key = 'sk-proj-mayBgL7AxeyXQnxLlJL5T3BlbkFJPmO5bCmENRMUbggB2dNA'
 
-# OpenAI 챔피언 클래스 정의
-class Champion:
-    def __init__(self, model='gpt-4'):
-        self.model = model
+client = OpenAI()
 
-    def get_response(self, prompt):
-        try:
-            response = openai.Completion.create(
-                model=self.model,
-                prompt=prompt,
-                max_tokens=150
-            )
-            return response.choices[0].text.strip()
-        except Exception as e:
-            return f"Error: {e}"
-
-# 챔피언 객체 생성
-champion = Champion()
-
-# 사용자 입력 받기
-user_input = st.text_area("질문을 입력하세요:")
-
-if st.button("응답 받기"):
-    if user_input:
-        response = champion.get_response(user_input)
-        st.write("챔피언의 응답:")
-        st.write(response)
-    else:
-        st.write("질문을 입력하세요.")
-
-# 이미지 업로드 및 표시
-uploaded_file = st.file_uploader("이미지를 업로드하세요", type=["png", "jpg", "jpeg"])
-
-if uploaded_file is not None:
-    # 이미지 표시
-    st.image(uploaded_file, caption='업로드된 이미지', use_column_width=True)
-    
-    # 커스텀 HTML/CSS 및 JavaScript 코드 삽입
-    components.html(f"""
-        <style>
-            img {{
-                border: 5px solid #555;
-                border-radius: 15px;
-                cursor: pointer;
-            }}
-        </style>
-        <img src="data:image/jpeg;base64,{uploaded_file.getvalue().decode('utf-8')}" id="clickable-image" width="100%" />
-        <div id="response-box" style="margin-top: 20px; display: none;">
-            <textarea id="response-text" rows="4" style="width: 100%;"></textarea>
-        </div>
-        <script>
-            document.getElementById('clickable-image').onclick = function() {{
-                document.getElementById('response-box').style.display = 'block';
-                const textArea = document.getElementById('response-text');
-                textArea.value = `{champion.get_response(user_input)}`;
-            }};
-        </script>
-    """, height=600)
-
+def respond(messages):
+    client = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=messages
+    )
+    messages = [
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "Who won the world series in 2020?"},
+    {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
+    {"role": "user", "content": "Where was it played?"}
+    ]
+    return client.choices[0].message['content']
 
 
 # Streamlit 페이지 구성
