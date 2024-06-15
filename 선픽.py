@@ -104,7 +104,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # 이미지 파일 디렉토리 경로
-img_dir = 'path/to/your/image/directory'  # 여기에 실제 이미지 디렉토리 경로를 설정하세요.
+img_dir = 'https://item.kakaocdn.net/do/4df35949efd9d681ba97979ce27c82cdac8e738cb631e72fdb9a96b36413984e'  # 여기에 실제 이미지 디렉토리 경로를 설정하세요.
 
 # 이미지 파일 리스트
 img_files = ['image1.png', 'image2.png', 'image3.png']
