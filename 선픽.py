@@ -84,7 +84,7 @@ st.sidebar.markdown(
 
 # OpenAI API 키 설정
 openai.api_key = "sk-proj-ymDJhgmlypm59yovogzYT3BlbkFJa2IOtnB2mEXqIchhX4dO"
-
+client = openai.OpenAI()
 # 페이지 제목 설정
 st.title("OpenAI Assistant 웹페이지")
 
@@ -93,18 +93,17 @@ show_button = st.button("상성보기")
 
 # 상성보기 버튼 클릭 시 텍스트 입력 상자 및 응답 출력
 if show_button:
-    
-    # 응답 텍스트 출력
-    st.write("**어시스트봇:**", response_text)
-    
-    # OpenAI Assistant API 호출 및 응답 받기
-    response = client.chat.completions.create(
-      model="gpt-4-turbo-preview",
-      messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "LangChain은 무엇을 하는 라이브러리지?"}
-      ]
-    )
-    response
 
- 
+    # OpenAI Assistant API call
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": "LangChain은 무엇을 하는 라이브러리지?"}
+        ]
+    )
+    
+    # Process and display response
+    if response["choices"]:
+        response_text = response["choices"][0]["text"]
+        st.write("**어시스트봇:**", response_text)
