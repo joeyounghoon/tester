@@ -130,3 +130,5 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
+
+st.image('images.jpg', caption='Sunrise by the mountains' witdth='50px')
