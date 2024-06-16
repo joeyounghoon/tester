@@ -1,141 +1,96 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
-# Streamlit 페이지 구성
-st.set_page_config(layout="wide")
+# Custom CSS for styling
+st.markdown("""
+<style>
+body {
+    font-family: 'Spoqa Han Sans Neo', sans-serif;
+}
 
-# 사이드바에 들어가는 타이틀
-st.sidebar.title('OptimalBotAI')
+.header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 25px;
+}
 
-# Streamlit 페이지에 CSS 적용하기!
-st.markdown(
-    """
-    <style>
-    body {
-        overflow: hidden;
-    }
-    .main {
-        background-color: #f0f2f6;
-        display: flex;
-        flex-direction: row;
-        height: 100vh;
-    }
-    .sidebar {
-        padding: 10px;
-        background-color: #d3d3d3;
-        position: relative;
-        user-select: auto;
-        width: 336px;
-        height: 842px;
-        box-sizing: border-box;
-        flex-shrink: 0;
-    }
-    .champion-section {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 20px;
-    }
-    .champion-list-content {
-        width: 300px;
-        height: 350px;
-        display: flex;
-        flex-direction: column;
-        item-align: center;
-        gap: 10px;
-    }
-    .recommend-champ-title {
-        margin-top: 10px;
-        font-size: 15px;
-        font-weight: bold;
-        text-align: left;
-        color: black;
-    }
-    .divider {
-        width: 100%;
-        height: 2px;
-        position: absolute;
-        top: 50%;
-        z-index: 99999;
-        background-color: black;
-    }
+.sidebar {
+    width: 20%;
+    float: left;
+    padding: 20px;
+}
 
-    /*미디어 쿼리 패딩 제거 */
-    @media (min-width: 576px) {
-        .st-emotion-cache-1jicfl2 {
-            padding-left: 0 !important;
-            padding-right: 0 !important;
-        }
-    }
+.sidebar img {
+    max-width: 100%;
+    height: auto;
+}
 
-    /* 스크롤바 제거 */
-    .st-emotion-cache-1jicfl2 {
-        width: 100%;
-        padding: 0;
-        min-width: auto;
-        max-width: initial;
-    }
+.main-content {
+    width: 78%;
+    float: right;
+    padding: 20px;
+}
 
-    /*streamlit 기본 상단 바 제거*/
-    .st-emotion-cache-h4xjwg {
-        height: 0;
-    }
+.champion-box, .combo-box, .counter-box {
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
 
-    /*여백 안남게 scoll-margin 제거*/
-    .st-emotion-cache-1jzia57 h1, 
-    .st-emotion-cache-1jzia57 h2, 
-    .st-emotion-cache-1jzia57 h3, 
-    .st-emotion-cache-1jzia57 h4, 
-    .st-emotion-cache-1jzia57 h5, 
-    .st-emotion-cache-1jzia57 h6, 
-    .st-emotion-cache-1jzia57 span {
-        scroll-margin-top: 0;
-    }
+.champion-box {
+    background-color: #f4f4f9;
+    width: 80px;
+    height: 80px;
+}
 
-    /*streamlit에서 기본으로 제공하는 공유, 깃허브 링크 등등 바 설정*/
-    .st-emotion-cache-15ecox0.ezrtsby0 {
-        background-color: black;
-        border-radius: 10px;
-    }
+.combo-box {
+    background-color: #e3f2fd;
+    width: 150px;
+    height: 150px;
+}
 
-    /*화면 상단 gap 제거*/
-    .st-emotion-cache-1wmy9hl div {
-        gap: 0;
-    }
-    
+.counter-box {
+    background-color: #fce4ec;
+    width: 100px;
+    height: 100px;
+}
+</style>
+""", unsafe_allow_html=True)
 
-    /*여백 제거*/
-    .st-emotion-cache-ul70r3 {
-        margin-bottom: 0;
-    }
-    </style>
-    """, unsafe_allow_html=True
-)
+# Header
+st.markdown('<div class="header">OptimalBotAI</div>', unsafe_allow_html=True)
 
-# Streamlit markdown으로 구성!
-st.markdown(
-    """
-    <div class='divider'></div>
-    <div class='sidebar'>
-        <div class='champion-section'>
-            <h5 class='recommend-champ-title'>원딜 추천 챔피언</h5>
-            <div class="champion-list-content">
-            </div>
-        </div>
-        <div class='champion-section'>
-            <h5 class='recommend-champ-title'>서폿 추천 챔피언</h5>
-            <div class="champion-list-content">
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True
-)
+# Sidebar content
+st.markdown('<div class="sidebar">', unsafe_allow_html=True)
+st.text_input("Search Champions", "")
+st.markdown('<p>챔피언 목록</p>', unsafe_allow_html=True)
+champion_names = ["카이사", "진", "에쉬", "블츠", "룰루", "세라핀"]
+for name in champion_names:
+    st.markdown(f'<div class="champion-box">{name}</div>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
 
-def image():
-    st.markdown(
-        """
-        <div style='position: relative; height: 300px;'>
-            <img src='image1.png' alt='Sunrise by the mountains' style='position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 50%;'>
-        </div>
-        """, unsafe_allow_html=True
-    )
-image()
+# Main content
+st.markdown('<div class="main-content">', unsafe_allow_html=True)
+st.markdown('<p>챔피언을 선택해 주세요!</p>', unsafe_allow_html=True)
+
+selections = {
+    "조합": ["룰루", "룰루", "룰루"],
+    "카운터": ["세라핀", "진"]
+}
+
+# Selections display
+st.markdown('<div>', unsafe_allow_html=True)
+for key, imgs in selections.items():
+    st.markdown(f'<p>{key}</p>', unsafe_allow_html=True)
+    for img in imgs:
+        st.markdown(f'<div class="combo-box">{img}</div>', unsafe_allow_html=True)
+    st.markdown('<div class="combo-box">+</div>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
