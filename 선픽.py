@@ -137,18 +137,18 @@ import streamlit as st
 
 # Image links to be displayed
 image_links = [
-    "https://via.placeholder.com/150/0000FF/808080%20?Text=Image1",
-    "https://via.placeholder.com/150/FF0000/FFFFFF%20?Text=Image2",
-    "https://via.placeholder.com/150/FFFF00/000000%20?Text=Image3",
-    "https://via.placeholder.com/150/00FF00/0000FF%20?Text=Image4"
+    "https://opgg-static.akamaized.net/meta/images/lol/14.12.1/champion/Ashe.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto:good,a_0,f_webp,w_160,h_160&v=1717557723274",
+    "https://opgg-static.akamaized.net/meta/images/lol/14.12.1/champion/Caitlyn.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto:good,a_0,f_webp,w_160,h_160&v=1717557723274",
+    "https://opgg-static.akamaized.net/meta/images/lol/14.12.1/champion/Jhin.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto:good,a_0,f_webp,w_160,h_160&v=1717557723274",
+    "https://opgg-static.akamaized.net/meta/images/lol/14.12.1/champion/Kaisa.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto:good,a_0,f_webp,w_160,h_160&v=1717557723274"
 ]
 
 # Other image links to be displayed on click
 other_image_links = [
-    "https://via.placeholder.com/300/FF00FF/FFFFFF%20?Text=RelatedImage1",
-    "https://via.placeholder.com/300/00FFFF/000000%20?Text=RelatedImage2",
-    "https://via.placeholder.com/300/FFA500/FFFFFF%20?Text=RelatedImage3",
-    "https://via.placeholder.com/300/800000/FFFFFF%20?Text=RelatedImage4"
+    "https://opgg-static.akamaized.net/meta/images/lol/14.12.1/champion/Samira.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto:good,a_0,f_webp,w_160,h_160&v=1717557723274",
+    "https://opgg-static.akamaized.net/meta/images/lol/14.12.1/champion/MissFortune.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto:good,a_0,f_webp,w_160,h_160&v=1717557723274",
+    "https://opgg-static.akamaized.net/meta/images/lol/14.12.1/champion/Vayne.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto:good,a_0,f_webp,w_160,h_160&v=1717557723274",
+    "https://opgg-static.akamaized.net/meta/images/lol/14.12.1/champion/Xayah.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto:good,a_0,f_webp,w_160,h_160&v=1717557723274"
 ]
 
 st.title("Image Gallery with Streamlit and JavaScript")
@@ -183,10 +183,10 @@ st.markdown(
     
     <script>
     let otherImageLinks = [
-        "https://via.placeholder.com/300/FF00FF/FFFFFF%20?Text=RelatedImage1",
-        "https://via.placeholder.com/300/00FFFF/000000%20?Text=RelatedImage2",
-        "https://via.placeholder.com/300/FFA500/FFFFFF%20?Text=RelatedImage3",
-        "https://via.placeholder.com/300/800000/FFFFFF%20?Text=RelatedImage4"
+        "https://opgg-static.akamaized.net/meta/images/lol/14.12.1/champion/Samira.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto:good,a_0,f_webp,w_160,h_160&v=1717557723274",
+        "https://opgg-static.akamaized.net/meta/images/lol/14.12.1/champion/MissFortune.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto:good,a_0,f_webp,w_160,h_160&v=1717557723274",
+        "https://opgg-static.akamaized.net/meta/images/lol/14.12.1/champion/Vayne.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto:good,a_0,f_webp,w_160,h_160&v=1717557723274",
+        "https://opgg-static.akamaized.net/meta/images/lol/14.12.1/champion/Xayah.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto:good,a_0,f_webp,w_160,h_160&v=1717557723274"
     ];
 
     function displayDifferentImage(index) {
